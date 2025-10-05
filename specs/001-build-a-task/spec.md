@@ -1,98 +1,90 @@
 ```markdown
-# Feature Specification: Task management app (001-build-a-task)
+# 機能仕様: タスク管理アプリ (001-build-a-task)
 
 **Feature Branch**: `001-build-a-task`
-**Created**: 2025-10-05
-**Status**: Draft
-**Input**: User description: "Build a task management app with user authentication, real-time collaboration, and mobile support. Users should be able to create projects, assign tasks, and track progress with Kanban boards."
+**作成日**: 2025-10-05
+**ステータス**: Draft
+**入力**: ユーザー記述: "Build a task management app with user authentication, real-time collaboration, and mobile support. Users should be able to create projects, assign tasks, and track progress with Kanban boards."
 
-## Execution Flow (main)
+## 実行フロー（main）
 ```
-1. Parse user description from Input
-   → If empty: ERROR "No feature description provided"
-2. Extract key concepts from description
-   → Identify: actors, actions, data, constraints
-3. For each unclear aspect:
-   → Mark with [NEEDS CLARIFICATION: specific question]
-4. Fill User Scenarios & Testing section
-   → If no clear user flow: ERROR "Cannot determine user scenarios"
-5. Generate Functional Requirements
-   → Each requirement must be testable
-   → Mark ambiguous requirements
-6. Identify Key Entities (if data involved)
-7. Run Review Checklist
-   → If any [NEEDS CLARIFICATION]: WARN "Spec has uncertainties"
-   → If implementation details found: ERROR "Remove tech details"
-8. Return: SUCCESS (spec ready for planning)
+1. 入力からユーザー記述を解析する
+   → もし空なら: ERROR "No feature description provided"
+2. 記述から主要な概念を抽出する
+   → 抽出項目: アクター、アクション、データ、制約
+3. 不明点ごとに:
+   → [NEEDS CLARIFICATION: specific question] を付ける
+4. ユーザーシナリオとテストセクションを埋める
+   → ユーザーフローが不明瞭なら: ERROR "Cannot determine user scenarios"
+5. 機能要件を生成する
+   → 各要件はテスト可能であること
+   → 曖昧な要件はマークする
+6. 主要エンティティを特定する（データが関与する場合）
+7. レビューチェックリストを実行する
+   → [NEEDS CLARIFICATION] が残る場合: WARN "Spec has uncertainties"
+   → 実装詳細が混入している場合: ERROR "Remove tech details"
+8. 返却: SUCCESS（計画フェーズ準備完了）
 ```
 
 ---
 
-## ⚡ Quick Guidelines
-- ✅ Focus on WHAT users need and WHY
-- ❌ Avoid HOW to implement (no tech stack, APIs, code structure)
-- 👥 Written for business stakeholders, not developers
+## ⚡ クイックガイド
+- ✅ ユーザーが何を必要としているか（WHAT）とその理由（WHY）に集中する
+- ❌ 実装方法（HOW）を含めない（言語、フレームワーク、API 等）
+- 👥 ビジネス関係者向けの記述にする（開発者向けではない）
 
-### Section Requirements
-- **Mandatory sections**: Must be completed for every feature
-- **Optional sections**: Include only when relevant to the feature
-- When a section doesn't apply, remove it entirely (don't leave as "N/A")
+### セクション要件
+- **必須セクション**: すべての機能で完成させること
+- **任意セクション**: 関連する場合のみ含めること
+- 該当しないセクションは完全に削除する（"N/A" のまま残さない）
 
-### For AI Generation
-1. **Mark all ambiguities**: Use [NEEDS CLARIFICATION: specific question] for any assumption you'd need to make
-2. **Don't guess**: If the prompt doesn't specify something (e.g., "login system" without auth method), mark it
-3. **Think like a tester**: Every vague requirement should fail the "testable and unambiguous" checklist item
-4. **Common underspecified areas**:
-   - User roles and permissions
-   - Data retention and privacy policies
-   - Scale and performance targets
-   - Offline support expectations for mobile
-   - Security/compliance (e.g., SSO, OAuth, 2FA)
+### AI 生成時の注意
+1. **すべての曖昧さをマーク**: 前提が必要な箇所は [NEEDS CLARIFICATION: specific question] を使用する
+2. **憶測しない**: 認証方式など指定されていない場合は仮定せずマークする
+3. **テスター視点**: 曖昧な要件は "テスト可能か" のチェックに落ちるべき
+4. **よく曖昧になりやすい領域**:
+   - ユーザーロールと権限
+   - データ保持・プライバシー方針
+   - スケール・性能目標
+   - モバイルのオフラインサポート要件
+   - セキュリティ／コンプライアンス（SSO、OAuth、2FA 等）
 
 ---
 
-## User Scenarios & Testing *(mandatory)*
+## ユーザーシナリオとテスト（必須）
 
-### Primary User Story
-As a user, I want to create projects, add and assign tasks to collaborators, and track
-progress using Kanban boards so that my team can coordinate work in real time across web
-and mobile clients.
+### 主要なユーザーストーリー
+ユーザーとして、プロジェクトを作成し、タスクを追加・割り当て、Kanban ボードで進捗を追跡
+したい。こうしてチームは Web とモバイルクライアント間でリアルタイムに作業を調整できる。
 
-### Acceptance Scenarios
-1. **Given** an authenticated user, **When** they create a new project, **Then** the project is
-   created and visible to invited collaborators.
-2. **Given** a project member, **When** they create or assign a task, **Then** the task appears on
-   the project's default Kanban board and assigned users receive a notification.
-3. **Given** multiple collaborators, **When** one user moves a card on the Kanban board, **Then**
-   other collaborators see the update in real time.
+### 受け入れシナリオ
+1. **前提**: 認証済みのユーザーがいる。**操作**: 新しいプロジェクトを作成する。**期待**: プロジェクトが作成され、招待された協力者に表示される。
+2. **前提**: プロジェクトメンバーがいる。**操作**: タスクを作成または割り当てる。**期待**: タスクがプロジェクトのデフォルト Kanban ボードに表示され、割り当てられたユーザーに通知が届く。
+3. **前提**: 複数の協力者がいる。**操作**: あるユーザーがカードを移動する。**期待**: 他の協力者がリアルタイムで更新を確認できる。
 
-### Edge Cases
-- User loses network connectivity while editing a board (mobile offline): edits should be queued and
-  synchronized when connectivity is restored [NEEDS CLARIFICATION: offline conflict resolution policy].
-- Task reassignment to non-member: operation should be rejected with a clear error.
-- Large project with >10k tasks: pagination and filtering behavior must be defined [NEEDS CLARIFICATION: scale expectations].
+### エッジケース
+- モバイルでボード編集中にネットワーク切断が発生した場合: 編集はキューに入り、接続回復時に同期されるべき [NEEDS CLARIFICATION: オフライン競合解決ポリシー].
+- 非メンバーへのタスク再割り当て: 操作は拒否され、明確なエラーメッセージを返すこと。
+- タスク数が 10k を超える大規模プロジェクト: ページングやフィルタリングの挙動を定義する必要がある [NEEDS CLARIFICATION: スケール期待値].
 
-## Requirements *(mandatory)*
+## 要件（必須）
 
-### Functional Requirements
-- **FR-001**: System MUST allow users to register and authenticate (sign up, sign in).
-- **FR-002**: System MUST allow project creation and inviting collaborators to projects.
-- **FR-003**: System MUST allow creating tasks with title, description, assignee(s), labels, due dates,
-  and status columns.
-- **FR-004**: System MUST provide a Kanban board per project that supports moving tasks between
-  columns and ordering within columns.
-- **FR-005**: System MUST deliver real-time updates for board changes to all connected collaborators.
-- **FR-006**: System MUST support access control: project members vs. guests vs. admins.
-- **FR-007**: System MUST provide mobile support (responsive UI and/or native clients) and
-  handle intermittent connectivity.
-- **FR-008**: System MUST provide notifications for task assignment, mentions, and status changes.
+### 機能要件
+- **FR-001**: ユーザーが登録および認証（サインアップ、サインイン）できること。
+- **FR-002**: ユーザーがプロジェクトを作成し、協力者を招待できること。
+- **FR-003**: タイトル、説明、担当者、ラベル、期限、ステータス列を含むタスクを作成できること。
+- **FR-004**: 各プロジェクトに Kanban ボードを提供し、タスクの列間移動と列内の順序付けをサポートすること。
+- **FR-005**: ボードの変更について接続中のすべての協力者にリアルタイム更新を配信すること。
+- **FR-006**: アクセス制御をサポートすること（プロジェクトメンバー、ゲスト、管理者の区別）。
+- **FR-007**: モバイルサポート（レスポンシブ UI またはネイティブクライアント）を提供し、断続的な接続に対処すること。
+- **FR-008**: タスク割り当て、メンション、ステータス変更に関する通知を提供すること。
 
-*Unclear/Need clarification (to be resolved during Phase 0):*
-- **FR-009**: Authentication method (email/password, OAuth, SSO) [NEEDS CLARIFICATION]
-- **FR-010**: Offline conflict resolution policy for mobile edits [NEEDS CLARIFICATION]
-- **FR-011**: Performance targets for real-time updates and acceptable latency [NEEDS CLARIFICATION]
+- *不明点 / Phase 0 で解決が必要な項目:*
+- **FR-009**: 認証方式（メール/パスワード、OAuth、SSO 等） [NEEDS CLARIFICATION]
+- **FR-010**: モバイル編集のオフライン競合解決ポリシー [NEEDS CLARIFICATION]
+- **FR-011**: リアルタイム更新のパフォーマンス目標と許容レイテンシ [NEEDS CLARIFICATION]
 
-### Key Entities *(include if feature involves data)*
+### 主要エンティティ（データが関与する場合）
 - **User**: id, name, email, avatar, roles, preferences
 - **Project**: id, name, description, owner_id, member_ids, settings
 - **Task**: id, project_id, title, description, assignee_ids, labels, due_date, status_column, position
@@ -101,147 +93,32 @@ and mobile clients.
 
 ---
 
-## Review & Acceptance Checklist
-### Content Quality
-- [ ] No implementation details (languages, frameworks, APIs)
-- [ ] Focused on user value and business needs
-- [ ] Written for non-technical stakeholders
-- [ ] All mandatory sections completed
+## レビュー & 受け入れチェックリスト
+### コンテンツ品質
+- [ ] 実装の詳細（言語、フレームワーク、API）を含まないこと
+- [ ] ユーザー価値とビジネスニーズに焦点を当てていること
+- [ ] 非技術系ステークホルダー向けに書かれていること
+- [ ] すべての必須セクションが完成していること
 
-### Requirement Completeness
-- [ ] No [NEEDS CLARIFICATION] markers remain (or they are captured for Phase 0)
-- [ ] Requirements are testable and unambiguous
-- [ ] Success criteria are measurable
-- [ ] Scope is clearly bounded
-- [ ] Dependencies and assumptions identified
+### 要件の完全性
+- [ ] [NEEDS CLARIFICATION] マーカーが残っていない（または Phase 0 用に捕捉されている）
+- [ ] 要件がテスト可能で曖昧でないこと
+- [ ] 成功基準が測定可能であること
+- [ ] スコープが明確に定義されていること
+- [ ] 依存関係と前提が特定されていること
 
 ---
 
-## Execution Status
-- [x] User description parsed
-- [x] Key concepts extracted
-- [x] Ambiguities marked
-- [ ] User scenarios defined
-- [x] Requirements generated
-- [x] Entities identified
-- [ ] Review checklist passed
+## 実行状況
+- [x] ユーザー記述を解析済み
+- [x] 主要概念を抽出済み
+- [x] 曖昧点をマーク済み
+- [ ] ユーザーシナリオを定義済み
+- [x] 要件を生成済み
+- [x] エンティティを特定済み
+- [ ] レビューチェックリストを通過
 
 ---
 
 ```
-# Feature Specification: [FEATURE NAME]
-
-**Feature Branch**: `[###-feature-name]`
-**Created**: [DATE]
-**Status**: Draft
-**Input**: User description: "$ARGUMENTS"
-
-## Execution Flow (main)
-```
-1. Parse user description from Input
-   → If empty: ERROR "No feature description provided"
-2. Extract key concepts from description
-   → Identify: actors, actions, data, constraints
-3. For each unclear aspect:
-   → Mark with [NEEDS CLARIFICATION: specific question]
-4. Fill User Scenarios & Testing section
-   → If no clear user flow: ERROR "Cannot determine user scenarios"
-5. Generate Functional Requirements
-   → Each requirement must be testable
-   → Mark ambiguous requirements
-6. Identify Key Entities (if data involved)
-7. Run Review Checklist
-   → If any [NEEDS CLARIFICATION]: WARN "Spec has uncertainties"
-   → If implementation details found: ERROR "Remove tech details"
-8. Return: SUCCESS (spec ready for planning)
-```
-
----
-
-## ⚡ Quick Guidelines
-- ✅ Focus on WHAT users need and WHY
-- ❌ Avoid HOW to implement (no tech stack, APIs, code structure)
-- 👥 Written for business stakeholders, not developers
-
-### Section Requirements
-- **Mandatory sections**: Must be completed for every feature
-- **Optional sections**: Include only when relevant to the feature
-- When a section doesn't apply, remove it entirely (don't leave as "N/A")
-
-### For AI Generation
-When creating this spec from a user prompt:
-1. **Mark all ambiguities**: Use [NEEDS CLARIFICATION: specific question] for any assumption you'd need to make
-2. **Don't guess**: If the prompt doesn't specify something (e.g., "login system" without auth method), mark it
-3. **Think like a tester**: Every vague requirement should fail the "testable and unambiguous" checklist item
-4. **Common underspecified areas**:
-   - User types and permissions
-   - Data retention/deletion policies
-   - Performance targets and scale
-   - Error handling behaviors
-   - Integration requirements
-   - Security/compliance needs
-
----
-
-## User Scenarios & Testing *(mandatory)*
-
-### Primary User Story
-[Describe the main user journey in plain language]
-
-### Acceptance Scenarios
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
-2. **Given** [initial state], **When** [action], **Then** [expected outcome]
-
-### Edge Cases
-- What happens when [boundary condition]?
-- How does system handle [error scenario]?
-
-## Requirements *(mandatory)*
-
-### Functional Requirements
-- **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
-- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]
-- **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
-- **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
-- **FR-005**: System MUST [behavior, e.g., "log all security events"]
-
-*Example of marking unclear requirements:*
-- **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
-- **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
-
-### Key Entities *(include if feature involves data)*
-- **[Entity 1]**: [What it represents, key attributes without implementation]
-- **[Entity 2]**: [What it represents, relationships to other entities]
-
----
-
-## Review & Acceptance Checklist
-*GATE: Automated checks run during main() execution*
-
-### Content Quality
-- [ ] No implementation details (languages, frameworks, APIs)
-- [ ] Focused on user value and business needs
-- [ ] Written for non-technical stakeholders
-- [ ] All mandatory sections completed
-
-### Requirement Completeness
-- [ ] No [NEEDS CLARIFICATION] markers remain
-- [ ] Requirements are testable and unambiguous
-- [ ] Success criteria are measurable
-- [ ] Scope is clearly bounded
-- [ ] Dependencies and assumptions identified
-
----
-
-## Execution Status
-*Updated by main() during processing*
-
-- [ ] User description parsed
-- [ ] Key concepts extracted
-- [ ] Ambiguities marked
-- [ ] User scenarios defined
-- [ ] Requirements generated
-- [ ] Entities identified
-- [ ] Review checklist passed
-
----
+- 該当しないセクションは完全に削除する（"N/A" のまま残さない）
